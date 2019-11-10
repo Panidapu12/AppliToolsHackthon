@@ -34,7 +34,7 @@ namespace AppliToolsHackaThon
         {
             bool elementVisible = false;
             var time = Stopwatch.StartNew();
-            int timeOut = 120000;
+            int timeOut = 10000;
             while (time.ElapsedMilliseconds < timeOut)
             {
                 try
@@ -107,6 +107,39 @@ namespace AppliToolsHackaThon
 
 
 
+        }
+
+        public static List<string> getColumnDataFromATableByIdex(this IWebElement element, int indexOfcoloumn, bool isTableHasHeader)
+        {
+            List<string> amountlist = new List<string>();
+            try
+            {
+                var rowElements = element.FindElements(By.TagName("tr"));
+                if (isTableHasHeader)
+                {
+                    for (int i = 1; i < rowElements.Count; i++)
+                    {
+                        var cellEelements = rowElements[i].FindElements(By.TagName("td"));
+                        amountlist.Add(cellEelements[indexOfcoloumn].getText());
+                    }
+                }
+                else
+                {
+                    foreach (var item in rowElements)
+                    {
+                        var cellEelements = item.FindElements(By.TagName("td"));
+                        amountlist.Add(cellEelements[indexOfcoloumn].getText());
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+               
+            }
+
+            return amountlist;
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AppliToolsHackaThon;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 namespace AppliToolsHackathon
@@ -44,5 +45,12 @@ namespace AppliToolsHackathon
 
         [FindsBy(How = How.XPath, Using = "//*[contains(@id,'random_id')]")]
         public IWebElement LoginErrorAlert { get; set; }
+
+        public void loginToApp(string username, string password)
+        {
+            Pages.loginPage.UserName.enterText(username);
+            Pages.loginPage.PassWord.enterText(password);
+            Pages.loginPage.loginButton.ClickOn();
+        }
     }
 }

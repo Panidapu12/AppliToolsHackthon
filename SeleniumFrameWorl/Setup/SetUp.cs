@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Applitools.Selenium;
 using NUnit;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,12 +12,15 @@ namespace AppliToolsHackathon
 
     public class Setup
     {
+        public static string TestCaseName;
+        public static string AppName = "ACM Demo App";
+        public static Eyes eyes;
         [SetUp]
         public void beforeTest()
         {
             Configuration configuration = new Configuration();
-
-            if (!TestContext.CurrentContext.Test.Name.Contains("DynamiContentTest"))
+            TestCaseName = TestContext.CurrentContext.Test.Name;
+            if (!TestContext.CurrentContext.Test.Name.Contains("DynamicContentTest"))
             {
                 configuration.configureEnvForTests("V2");
             }
@@ -30,7 +34,24 @@ namespace AppliToolsHackathon
         [TearDown]
         public void afterTest()
         {
+            if (eyes.IsOpen)
+            {
+                try
+                {
+                    eyes.Close();
+                    eyes.AbortIfNotClosed();
+                }
+                catch (Exception e)
+                {
+
+                    Configuration.driver.Close();
+                    Assert.Fail(e.Message);
+                }
+                
+            }
             Configuration.driver.Close();
+
+
         }
 
     }

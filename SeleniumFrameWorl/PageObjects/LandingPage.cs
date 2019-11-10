@@ -24,5 +24,12 @@ namespace AppliToolHackathon
         [FindsBy(How = How.Id, Using = "flashSale2")]
         public IWebElement flashSale2 { get; set; }
 
+        [FindsBy(How = How.Id, Using = "addDataset")]
+
+        public IWebElement addDataSet { get; set; }
+
+        [FindsBy(How = How.Id, Using = "canvas")]
+
+        public IWebElement CanvasObject { get; set; }
     }
 }

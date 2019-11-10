@@ -6,7 +6,7 @@ using SeleniumExtras.PageObjects;
 
 namespace AppliToolsHackathon
 {
-    public static class Pages
+    public class Pages
     {
         public static T GetPage<T>() where T : new()
         {
